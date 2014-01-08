@@ -1,7 +1,7 @@
 class VideoHasher
   def self.compute_hash(data)
     data = JSON.parse(data)
-    hash = data["size"]
+    hash = size = data["size"]
     chunks = data["chunks"]
 
     chunks.each do |chunk|
@@ -13,6 +13,6 @@ class VideoHasher
       end
     end
 
-    hash.to_s(16)
+    [hash.to_s(16), size]
   end
 end

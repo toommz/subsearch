@@ -3,7 +3,16 @@ class SearchController < ApplicationController
   end
 
   def search
-    @hash = VideoHasher.compute_hash(params[:hidden_data])
+    hash, size = VideoHasher.compute_hash(params[:hidden_data])
+
+    options = {
+      'moviehash' => hash,
+      'moviebytesize' => size.to_s
+    }
+
+    osdb_client = OsdbClient.new
+    @subs = osdb_client.search_subs(options)
+
     respond_to do |format|
       format.js
     end

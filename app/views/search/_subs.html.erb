@@ -1,0 +1,14 @@
+<% if subs['data'] != false %>
+  <% subs['data'].each do |sub| %>
+    <div class="row">
+      <div class="small-12 columns">
+        <h2><%= sub['MovieName'] %></h2>
+        <h3><%= sub['SubFileName'] %></h3>
+        <h4><%= sub['SubLanguageID'] %></h4>
+        <%= link_to 'Download', sub['ZipDownloadLink'] %>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  No subtitles found
+<% end %>
