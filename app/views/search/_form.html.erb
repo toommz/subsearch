@@ -1,5 +1,16 @@
 <%= form_tag(search_path, remote: true, id: 'search_form') do %>
   <div class="row">
+    <dl class="accordion" data-accordion>
+      <dd>
+      <a href="#options">Show Options</a>
+      <div id="options" class="content">
+        <%= select_tag 'select_lang', options_for_select(['fre', 'eng']), prompt: 'Select a language:' %>
+      </div>
+      </dd>
+    </dl>
+  </div>
+
+  <div class="row">
     <div class="small-9 columns">
       <%= file_field_tag 'file_input', class: 'hide' %>
       <%= button_tag 'Select your video file', name: 'file_button', class: 'button', type: 'button' %>

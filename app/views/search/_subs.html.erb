@@ -1,7 +1,7 @@
 <% if subs['data'] != false %>
   <% subs['data'].each do |sub| %>
     <div class="row">
-      <div class="small-12 columns">
+      <div class="small-12 columns panel <%= cycle('callout', '') %>">
         <h2><%= sub['MovieName'] %></h2>
         <h3><%= sub['SubFileName'] %></h3>
         <h4><%= sub['SubLanguageID'] %></h4>
@@ -10,5 +10,5 @@
     </div>
   <% end %>
 <% else %>
-  No subtitles found
+  <h4>No subtitles found</h4>
 <% end %>

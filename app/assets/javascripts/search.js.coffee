@@ -18,10 +18,17 @@ prepare_data = (data) ->
 
   return JSON.stringify(json)
 
+show_spinner = (show) ->
+  if show == true
+    scope.search_button.html('Searching <img src="/assets/spinner.gif" />')
+  else
+    scope.search_button.html('Search!')
+
 clear_file_input = ->
   scope.file_input.wrap('<form></form>').parent('form').trigger('reset')
   scope.file_input.unwrap()
   change_search_button_state()
+  show_spinner(true)
 
   return undefined
 

@@ -7,7 +7,8 @@ class SearchController < ApplicationController
 
     options = {
       'moviehash' => hash,
-      'moviebytesize' => size.to_s
+      'moviebytesize' => size.to_s,
+      'sublanguageid' => params[:select_lang]
     }
 
     osdb_client = OsdbClient.new

@@ -15,7 +15,8 @@ class OsdbClient
   private
   def create_server
     server = XMLRPC::Client.new('api.opensubtitles.org', '/xml-rpc')
-    server.http_header_extra = {'accept-encoding' => 'identity'}
+    server.http_header_extra = {'accept-encoding' => 'gzip'}
+    server.set_parser ZlibParserDecorator.new(server.send(:parser))
     server
   end
 
@@ -26,5 +27,19 @@ class OsdbClient
 
   def log_out
     @server.call('LogOut', @token)
+  end
+end
+
+class ZlibParserDecorator
+  def initialize(parser)
+    @parser = parser
+  end
+
+  def parseMethodResponse(responseText)
+    @parser.parseMethodResponse(Zlib::GzipReader.new(StringIO.new(responseText)).read)
+  end
+
+  def parseMethodCall(*args)
+    @parser.parseMethodCall(*args)
   end
 end
