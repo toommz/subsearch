@@ -7,9 +7,13 @@ class OsdbClient
   end
 
   def search_subs(options = {})
-    res = @server.call('SearchSubtitles', @token, [ options ])
-    log_out
-    res
+    begin
+      res = @server.call('SearchSubtitles', @token, [ options ])
+      log_out
+      res
+    rescue XMLRPC::FaultException
+      "An Error occured while communicating with OSDB server."
+    end
   end
 
   private
